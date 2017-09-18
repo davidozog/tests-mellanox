@@ -142,6 +142,8 @@ static int stressing_shmalloc_test (void)
      * In the assumption, that smalloc can allocate memory that
      * is greater than set in environment variable by an user.
      */
+    printf("max_possible_alloc = %ld\n", max_possible_alloc);
+    printf("heap_size = %ld\n", heap_size);
     if (max_possible_alloc < heap_size) {
 #endif
         log_error(OSH_TC, "Maximum allocation size is %ld . exiting...\n",

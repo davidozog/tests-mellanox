@@ -15,6 +15,10 @@
 
 #include "osh_basic_tests.h"
 
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+
 /****************************************************************************
  * Test Case can consitis of different number of separate items
  * it is recommended to form every item as function
@@ -22,7 +26,11 @@
 static int test_item1(void);
 
 
+#ifdef QUICK_TEST
+#define WAIT_COUNT  1
+#else
 #define WAIT_COUNT  5
+#endif
 
 
 /****************************************************************************
@@ -58,6 +66,25 @@ static int test_item1(void)
 
     num_proc = _num_pes();
     my_proc = _my_pe();
+//{
+//  int i = 0;
+//  char hostname[256];
+//  gethostname(hostname, sizeof(hostname));
+//  system("rm gdb.[0-9]*");
+//
+//  shmem_barrier_all();
+//
+//  char filename[64];
+//  sprintf(filename, "gdb.%d", getpid());
+//  FILE *fp = fopen(filename, "w");
+//  fprintf( fp, "%d", getpid() );
+//  fclose(fp);
+//  printf("PID %d on %s ready for attach\n", getpid(), hostname);
+//
+//  fflush(stdout);
+//  while (0 == i)
+//      sleep(1);
+//}
 
     shmem_addr = shmalloc(sizeof(*shmem_addr));
     if (shmem_addr)
