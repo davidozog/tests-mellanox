@@ -39,5 +39,11 @@ AC_CHECK_DECLS([shmem_alltoall32, shmem_alltoall64],
     ],
     [AM_CONDITIONAL([HAVE_ALLTOALL],[false])], [#include "shmem.h"])
 
+AC_ARG_ENABLE([mpi],
+    [AC_HELP_STRING([--disable-mpi],
+    [Disable OPENSHMEM+MPI mixed tests (default: enabled)])])
+AS_IF([test "$enable_mpi" != "no"], [AC_DEFINE([ENABLE_MPI], [1], [Enable MPI mixed tests])])
+AM_CONDITIONAL([ENABLE_MPI], [test "$enable_mpi" != "no"])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
