@@ -12,8 +12,13 @@
 #include "rnd_mt.h"
 #include "osh_basic_tests.h"
 
+#ifdef QUICK_TEST
+#define TABLE_LENGTH                        (10)
+#define ITERATIONS_CONST                    (2)
+#else
 #define TABLE_LENGTH                        (100)
 #define ITERATIONS_CONST                    (10)
+#endif
 #define PRETEST_CONST                       (4)
 #define POTENTIAL_MAX_SIZE(heap_size)       (heap_size/2)
 #define SHMEMALIGN_BOUNDRY                  (2)
